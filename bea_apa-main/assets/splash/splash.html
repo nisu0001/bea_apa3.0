@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Loading Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            color: white;
+        }
+        
+        .app-name {
+            font-size: 32px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 1s;
+            margin-bottom: 30px;
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 6px;
+            background-color: #16213e;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0;
+            background-color: #4361ee;
+            border-radius: 3px;
+            animation: loading 8s ease-in-out forwards;
+        }
+        
+        .loading-text {
+            margin-top: 10px;
+            font-size: 14px;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes loading {
+            0% { width: 0; }
+            20% { width: 20%; }
+            50% { width: 50%; }
+            70% { width: 70%; }
+            90% { width: 90%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes blink {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* Water Loading Animation Styles */
+        .page__loader {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            z-index: 1000;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 auto 20px;
+        }
+        
+        .page__loader svg {
+            height: 282px;
+            z-index: 10001;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-44%, -55%);
+        }
+        
+        .page__loader #rect4487 {
+            fill: #1a1a2e;
+        }
+        
+        .loader {
+            height: 200px;
+            width: 174px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+        
+        .water {
+            background: white;
+            position: relative;
+            top: 50%;
+            height: 200%;
+            width: 200%;
+            z-index: 1000;
+            border-radius: 38%;
+            left: -50%;
+            transform: rotate(360deg);
+            transition: all 1s ease;
+            animation: wave 5s linear infinite,
+                movetop 10s linear forwards;
+        }
+        
+        @keyframes movetop {
+            0% {
+                top: 60%;
+            }
+            100% {
+                top: 10px;
+            }
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page__loader">
+            <svg viewbox="0 0 30 42">
+                <path
+                    fill="transparent"
+                    d="m 13.552735,2.0426703 q 1.5,3.7999997 10,14.9999997 a 12.8,12.8 0 1 1 -20.0000007,0 Q 12.052736,5.84267 13.552735,2.0426703 Z"
+                    id="path2"
+                    style="stroke:#ffffff;stroke-width:1.3" />
+                <path
+                    style="opacity:1;fill-opacity:1;stroke:none;stroke-width:0.12159528;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                    d="M 0,1.3127116e-4 V 38.582162 H 27.10547 V 1.3127116e-4 Z M 13.552735,2.0431 c 1,2.5333332 4.333334,7.5333335 10,15 a 12.8,12.8 0 1 1 -20.000001,0 c 5.6666682,-7.4666665 9.000002,-12.4666668 10.000001,-15 z"
+                    id="rect4487" />
+            </svg>
+            <div class="loader">
+                <div class="water"></div>
+            </div>
+        </div>
+        <h1 class="app-name">Bea Apă</h1>
+        <p class="tagline">Your Boyfriend is trying hard to keep you hydrated</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p class="loading-text">Initializing...</p>
+        
+        <script>
+            // Change loading text over time
+            const loadingTexts = [
+                "Lots of hours went into this...",
+                "To keep you hydrated and looking pretty...",
+                "coz I love you...",
+                "Now grab a cup...",
+                "Lets start drinking water..."
+            ];
+            
+            const loadingElement = document.querySelector('.loading-text');
+            let currentIndex = 0;
+            
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % loadingTexts.length;
+                loadingElement.textContent = loadingTexts[currentIndex];
+            }, 2000);
+        </script>
+    </div>
+</body>
+</html>
